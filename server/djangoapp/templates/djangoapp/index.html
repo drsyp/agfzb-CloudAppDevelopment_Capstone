@@ -10,29 +10,115 @@
     <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
-
+    <style>
+        footer {
+            display:flex;
+            background-color: black;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            width: 100%;
+            border-top: 1px solid white;
+            justify-content:center;
+            align-items:center;
+        }
+        .phone {
+            color: darkgrey;
+            font-size: 14px;
+            margin:auto;
+        }
+        .address {
+            color: darkgrey;
+            font-size: 14px;
+            margin:auto;
+        }
+        .contact {
+            color: darkgrey;
+            font-size: 16px;
+            margin:auto;
+        }
+    </style>
 </head>
-
     <body>
-    <!--Add a nav bar here -->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Menu 1</a>
-                <a class="navbar-brand" href="#">Menu 2</a>
-                <a class="navbar-brand" href="contact">Contact us</a>
-                <a class="navbar-brand" href="about">About us</a>
+        <!--menu -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index">Home</a>
+                    <a class="navbar-brand" href="contact">Contact us</a>
+                    <a class="navbar-brand" href="about">About us</a>
+                    <a class="navbar-brand" href="registration">Register</a>
+                    <ul class="nav navbar-nav nav-right">
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a  class="btn btn-link"href=""></a>
+                            <a class="btn btn-link" href="logout">Logout</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <form class ="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                            {% csrf_token %}
+                            <!--<div class="input-group">-->
+                                <input type="text" class="form-control" placeholder="Username" name="username">
+                                <input type="password" class="form-control" placeholder="Password" name="psw">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <a class="btn btn-link"href="registration">Sign Up</a>
+                            <!--</div> -->       
+                            </form>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!--
+    {% if user.is_authenticated %}
+    <p>Username: {{user.username}}, First name: {{user.first_name}}, Last name: {{user.last_name}} </p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <div class="rightalign">
+        <div class="dropdown">
+            <button class="dropbtn">{{user.first_name}}</button>
+            <div class="dropdown-content">
+                    <a href="{% url 'djangoapp:logout' %}">Logout</a>
             </div>
         </div>
-    </nav>
-    <!--Add a dealer table here -->
+    </div>
+    {% endif %}
 
-    <!-- Remove this line the first time you edit this file -->
-    This is the index page of your Django app!
-
-    <footer>
-        <p><a href="contact">Contact us</a></p>
-      </footer> 
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="container"> 
+          <h1>Login</h1>
+          <div class="form-group">
+            <label for="username"><b>User Name</b></label>
+            <input id="username" class = "form-control" type="text" placeholder="Enter User Name: " name="username" required> 
+            <label for="psw"><b>Password</b></label>
+            <input id="psw" class = "form-control" type="password"  placeholder="Enter Password: " name="psw" required> 
+          </div>
+          {% if message %}
+            <div class="alert alert-warning"> 
+              {{ message }}
+            </div>
+          {% endif %}
+          <button class="btn btn-primary" type="submit">Login</button> 
+        </div>
+      </form>
+    -->
+        <!-- pied de page -->
+        <footer>
+            <div class="phone"> 
+            Phone: (###) ###-####(###) ###-####
+            </div>
+            <div class="contact">
+                <a class="contact" href="contact">- Contact us - </a>
+            </div>
+            <div class="address">
+            Address: 1234 Road Name Hwy City, State 12345
+            </div>
+        </footer>
     </body>
-
 </html>
