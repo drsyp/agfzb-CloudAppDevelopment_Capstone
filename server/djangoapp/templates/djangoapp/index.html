@@ -48,6 +48,11 @@
         }
         
     </style>
+    <script>
+        $(function() {
+          $('#table').bootstrapTable()
+        })
+      </script>
 </head>
     <body >
         <!--menu -->
@@ -79,10 +84,37 @@
                         </li>
                         {% endif %}
                     </ul>
-                
                 </div>
             </div>
         </nav>
+        <!-- Tab dealer -->
+        <div style="margin:50px;">
+        <table class="table" id="table"  data-filter-control="true">
+            <thead>
+                <tr>
+                    <th data-field="id">ID</th>
+                    <th data-field="full_name">Dealer Name</th>
+                    <th data-field="city">City</th>
+                    <th data-field="address">Address</th>
+                    <th data-field="zip">Zip</th>
+                    <th data-field="state" data-filter-control="select">State</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dealer in dealership_list %}
+                    <tr>
+                        <td>{{dealer.id}}</td>
+                        <!--<td>{{dealer.full_name}}</td>-->
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                        <td>{{dealer.city}}</td>
+                        <td>{{dealer.address}}</td>
+                        <td>{{dealer.zip}}</td>
+                        <td>{{dealer.st}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <!--
     {% if user.is_authenticated %}
     <p>Username: {{user.username}}, First name: {{user.first_name}}, Last name: {{user.last_name}} </p>
