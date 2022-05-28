@@ -13,7 +13,7 @@
     <style>
         footer {
             display:flex;
-            background-color: black;
+            background-color: #1354aa;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -25,32 +25,41 @@
             align-items:center;
         }
         .phone {
-            color: darkgrey;
+            color: #eeeeee;
             font-size: 14px;
             margin:auto;
         }
         .address {
-            color: darkgrey;
+            color: #eeeeee;
             font-size: 14px;
             margin:auto;
         }
         .contact {
-            color: darkgrey;
+            color: #eeeeee;
             font-size: 16px;
             margin:auto;
         }
+        .bg-custom {
+            background-image: linear-gradient(15deg, #1354aa 0%, #eeeeee 100%);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
     </style>
 </head>
-    <body>
+    <body >
         <!--menu -->
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index">Home</a>
-                    <a class="navbar-brand" href="contact">Contact us</a>
-                    <a class="navbar-brand" href="about">About us</a>
-                    <a class="navbar-brand" href="registration">Register</a>
-                    <ul class="nav navbar-nav nav-right">
+                    <a class="navbar-brand" href="/djangoapp">Home</a>
+                    <a class="navbar-brand" href="/djangoapp/contact">Contact us</a>
+                    <a class="navbar-brand" href="/djangoapp/about">About us</a>
+                    <a class="navbar-brand" href="/djangoapp/registration">Register</a>
+                    <ul >
+                    <div class="navbar-brand nav-right align-items-right">
+                    
                         {% if user.is_authenticated %}
                         <li>
                             <a  class="btn btn-link"href=""></a>
@@ -70,6 +79,7 @@
                         </li>
                         {% endif %}
                     </ul>
+                
                 </div>
             </div>
         </nav>
