@@ -86,39 +86,37 @@
         </div>
     </nav>
     <!--Add a dealer table here -->
-    <div class="card-columns" >
-    {% for review in review_list %}
-    <div class="card "> 
-        <img class="card-img-left" src="{{MEDIA_URL}}/emoji/positive.png">
-        <div class="card-body"> 
-        <p>{{review.dealership}}</p>
-        <p>{{review.name}}</p>
-        <p>{{review.purchase}}</p>
-        <p>{{review.review}}</p>
-        
-        <p>{{review.purchase_date}}</p>
-        <p>{{review.car_make}}</p>
-        <p>{{review.car_model}}</p>
-        <p>{{review.car_year}}</p>
-        <p>{{review.sentiment}}</p>
+    <h1 style="text-align:center;">Reviews for the dealer</h1>
+    <div class="container">
+        <div class="card-deck">
+            {% for review in review_list %}
+            <div class="card border rounded" style="width: 200px;margin:20px;"> 
+                <img class="card-img-left" src="{{MEDIA_URL}}/emoji/positive.png" width="30px" >
+                <div class="card-body"> 
+                <p>Name : {{review.name}}</p>
+                <p>Purchase date : {{review.purchase_date}}</p>
+                <p>Brand : {{review.car_make}}</p>
+                <p>Model : {{review.car_model}}</p>
+                <p>Year : {{review.car_year}}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-    </div>
-
+    <div style="text-align:center;">
     {% if user.is_authenticated %}  
-        <a  class="btn btn-link"href="add_review">Add review</a>
+        <a  class="btn btn-link"href="add_review" > - Add review - </a>
     {% else %}
-        <p>Login in to add review...</p>
+        <p>- Login in to add review :) - </p>
     {% endif %}
-   
+    </div>
      <!-- pied de page -->
      <footer>
         <div class="phone"> 
         Phone: (###) ###-####(###) ###-####
         </div>
         <div class="contact">
-            <a class="contact" href="contact">- Contact us - </a>
+            <a class="contact" href="/djangoapp/contact">- Contact us - </a>
         </div>
         <div class="address">
         Address: 1234 Road Name Hwy City, State 12345
