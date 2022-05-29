@@ -37,7 +37,7 @@ def get_dealers_from_cf(url, **kwargs):
     print (json_result)
     if json_result:
         # Get the row list in JSON as dealers
-        dealers = json_result["docs"]
+        dealers = json_result["dealer"]
         # For each dealer object
         for dealer in dealers:
             # Get its content in `doc` object
@@ -61,11 +61,12 @@ def get_dealer_by_id_from_cf(url, dealerId):
     json_result = get_request(url)
     if json_result:
         # Get the row list in JSON as dealers
-        dealers = json_result["rows"]
+        dealers = json_result["dealer"]
         # For each dealer object
         for dealer in dealers:
             # Get its content in `doc` object
-            dealer_doc = dealer["doc"]
+            #dealer_doc = dealer["doc"]
+            dealer_doc = dealer
             # Create a CarDealer object with values in `doc` object
             dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
                                    id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],
@@ -79,9 +80,9 @@ def get_dealer_by_id_from_cf(url, dealerId):
 def get_dealer_reviews_by_id_from_cf(url, dealerId):
     results = []
     json_result = get_request(url, dealerId=dealerId)
-    if json_result and 'docs' in json_result:
+    if json_result and 'review' in json_result:
         print(json_result, dealerId)
-        reviews = json_result['docs']
+        reviews = json_result['review']
         for review in reviews:
             try:
                 review_obj = DealerReview(id = review["id"], name = review["name"], 

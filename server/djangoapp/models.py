@@ -25,7 +25,7 @@ from django.utils.timezone import now
 
 # Create your models here.
 class CarMake(models.Model):
-    key = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=255)
 
@@ -34,7 +34,7 @@ class CarMake(models.Model):
 
 
 class CarModel(models.Model):
-    key = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     SEDAN = 'SEDAN'
     SUV = 'SUV'
     WAGON = 'WAGON'

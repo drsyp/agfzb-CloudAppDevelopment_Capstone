@@ -98,7 +98,7 @@ def registration_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://9a8d0549.eu-gb.apigw.appdomain.cloud/api/dealer-get/dealer-get"
+        url = "https://9a8d0549.eu-gb.apigw.appdomain.cloud/api/dealership"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
@@ -123,7 +123,7 @@ def get_dealer_details(request, dealer_id):
 def add_review(request, dealer_id):
     if request.method == "GET":
         dealersid = dealer_id
-        url = "https://9a8d0549.eu-gb.apigw.appdomain.cloud/api/dealer-get?dealerId={0}".format(dealersid)
+        url = "https://9a8d0549.eu-gb.apigw.appdomain.cloud/api/dealership?dealerId={0}".format(dealersid)
         # Get dealers from the URL
         context = {
             "cars": CarModel.objects.all(),
