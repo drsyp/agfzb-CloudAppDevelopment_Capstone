@@ -44,7 +44,6 @@ def get_dealers_from_cf(url, **kwargs):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url)
-    print (json_result)
     if json_result:
         # Get the row list in JSON as dealers
         dealers = json_result["dealer"]
@@ -91,7 +90,6 @@ def get_dealer_reviews_by_id_from_cf(url, dealerId):
     results = []
     json_result = get_request(url, dealerId=dealerId)
     if json_result and 'review' in json_result:
-        print(json_result, dealerId)
         reviews = json_result['review']
         for review in reviews:
             try:
