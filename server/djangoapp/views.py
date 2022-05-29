@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarModel
-from .restapis import get_dealers_from_cf, get_dealer_reviews_by_id_from_cf
+from .restapis import get_dealers_from_cf, get_dealer_reviews_by_id_from_cf, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -147,8 +147,8 @@ def add_review(request, dealer_id):
                 review["car_year"]= car.year.strftime("%Y")
             json_payload = {"review": review}
             print (json_payload)
-            url = "https://9a8d0549.eu-gb.apigw.appdomain.cloud/api/reviews"
-            restapis.post_request(url, json_payload, dealerId=dealer_id)
+            url = "https://9a8d0549.eu-gb.apigw.appdomain.cloud/api/review"
+            post_request(url, json_payload, dealerId=dealer_id)
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
         else:
             return redirect("/djangoapp/login")

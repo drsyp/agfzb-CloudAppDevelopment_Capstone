@@ -106,17 +106,12 @@
     {% endfor %}
     </div>
 
-  
-    <a  class="btn btn-link"href="add_review">Add review</a>
-
-    eneral Contact Information
-
-    Phone
-        202-606-1800*
-    Mailing Address
-        U.S. Office of Personnel Management
-        1900 E Street, NW
-        Washington, DC 20415-1000
+    {% if user.is_authenticated %}  
+        <a  class="btn btn-link"href="add_review">Add review</a>
+    {% else %}
+        <p>Login in to add review...</p>
+    {% endif %}
+   
      <!-- pied de page -->
      <footer>
         <div class="phone"> 

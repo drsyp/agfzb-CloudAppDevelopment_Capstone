@@ -97,12 +97,13 @@
         {% for dealer in dealers %}
             <form action="/djangoapp/dealer/{{dealer.id}}/add_review/" method="post">
                 {% csrf_token %}
-        {% endfor %}
+        
                 <div class="form-group">
-                    <h1>Add a review about Sub-Ex Car Dealership</h1>
+                    <h1>Add a review about {{ dealer.full_name}} </h1>
                     <label for="content">Enter the review content:</label>
                     <textarea class="form-control" id="content" name="content" rows="2" placeholder="This is great car dealer" required></textarea>
                 </div>
+        {% endfor %}
                 <div class="form-group form-check">
                     <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
                     <label for="purchasecheck">Has purchased the car from Sub-Ex Car ? (select purchased car information below if checked)</label>
