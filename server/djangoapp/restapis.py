@@ -26,6 +26,7 @@ def get_request(url, **kwargs):
 # e.g., response = requests.post(url, params=kwargs, json=payload)
 def post_request(url, json_payload=None, **kwargs):
     try:
+        print (json_payload)
         result = requests.post(url, params=kwargs, json=json_payload)
         print(result)
         if result:
@@ -94,13 +95,15 @@ def get_dealer_reviews_by_id_from_cf(url, dealerId):
         reviews = json_result['review']
         for review in reviews:
             try:
-                review_obj = DealerReview(id = review["id"], name = review["name"], 
+                #review_obj = DealerReview(id = review["id"], name = review["name"], 
+                review_obj = DealerReview( name = review["name"], 
                 dealership = review["dealership"], review = review["review"], purchase=review["purchase"],
                 purchase_date = review["purchase_date"], car_make = review['car_make'],
                 car_model = review['car_model'], car_year= review['car_year'], sentiment= "none")
             
             except Exception as e:
-                review_obj = DealerReview(id = review["id"], name = review["name"], 
+                #review_obj = DealerReview(id = review["id"], name = review["name"], 
+                review_obj = DealerReview( name = review["name"], 
                 dealership = review["dealership"], 
                 review = review["review"], 
                 purchase=review["purchase"],

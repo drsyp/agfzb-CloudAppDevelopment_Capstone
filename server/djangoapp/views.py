@@ -129,20 +129,32 @@ def add_review(request, dealer_id):
             "cars": CarModel.objects.all(),
             "dealers": get_dealers_from_cf(url),
         }
+        print (context)
         return render(request, 'djangoapp/add_review.html', context)
     if request.method == "POST":
+        print("c'est un post")
         if request.user.is_authenticated:
+            print("authentifier")
             form = request.POST
-            review = {
-                "name": "{request.user.first_name} {request.user.last_name}",
+            purchaseChk = False
+            if form.get("purchasecheck"):
+                purchaseChk = True
+            fullName = request.user.first_name
+            fullName += " "+request.user.last_name
+            review = { 
+                "name": fullName,
+                #"name": "Claude Marie",
                 "dealership": dealer_id,
                 "review": form["content"],
-                "purchase": form.get("purchasecheck"),
-                }
+                "purchase": purchaseChk,
+                
+            }
             if form.get("purchasecheck"):
-                review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                print (form.get("purchasedate"))
+                review["purchase_date"] = datetime.strftime(datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").date(),"%m/%d/%Y")
+                #review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
                 car = CarModel.objects.get(pk=form["car"])
-                review["car_make"] = car.carmake.name
+                #review["car_make"] = car.carmake.name
                 review["car_model"] = car.name
                 review["car_year"]= car.year.strftime("%Y")
             json_payload = {"review": review}
